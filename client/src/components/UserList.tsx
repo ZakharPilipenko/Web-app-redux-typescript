@@ -3,6 +3,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import { fetchUsers } from '../store/action-creators/user';
 import type {} from 'redux-thunk/extend-redux';
 import { useActions } from '../hooks/useActions';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const UserList: React.FC = () => {
     const {users, error, loading} = useTypedSelector(state => state.user)
@@ -21,10 +22,10 @@ const UserList: React.FC = () => {
     }
 
     return (
-        <div>
-            {users.map(user => 
-                <div key={user.id}>{user.name}</div>)}
-        </div>
+        <ListGroup variant="flush">
+                {users.map(user => 
+                <ListGroup.Item key={user.id}>{user.name}</ListGroup.Item>)}
+        </ListGroup>
     );
 };
 

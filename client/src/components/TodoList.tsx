@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
+import Pagination from 'react-bootstrap/Pagination';
+
 
 const TodoList: React.FC = () => {
     const {page, error, limit, loading, todos} = useTypedSelector(state => state.todo)
@@ -23,11 +25,25 @@ const TodoList: React.FC = () => {
             {todos.map(todo =>
                 <div key={todo.id}>{todo.id} - {todo.title}</div>)}
             <div style={{display: "flex"}}>
-            {pages.map(p => 
-                <div 
+            {/* {pages.map(p => 
+                <div
+                key={p} 
                 onClick={() => setTodoPage(p)}
-                style={{border: p === page ? "2px solid green" : '1px solid gray', padding: 10, cursor: "pointer"}}>{p}</div>)}
-            </div>
+                style={{border: p === page ? "2px solid green" : '1px solid gray', padding: 10, cursor: "pointer"}}>{p}</div>)} */}
+            </div> 
+            <div>
+            <Pagination>
+                {pages.map( p => 
+                <Pagination.Item  
+                key={p}
+                onClick={() => setTodoPage(p)}
+                style={{backgroundColor: "#ABCCBB"}} 
+                active={p === page}>
+                {p}
+                </Pagination.Item>
+                 )}
+            </Pagination>    
+            </div> 
         </div>
     );
 };
